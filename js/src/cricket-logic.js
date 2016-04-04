@@ -70,6 +70,8 @@ var cricketIFFE = (function(numberOfPlayers) {
         for(var i = 0; i < multiplier; i += 1) {
             handleHitPoints(points);
         }
+
+        checkIfGameIsFinish();
     });
 
     function handleHitPoints(points) {
@@ -121,6 +123,12 @@ var cricketIFFE = (function(numberOfPlayers) {
         if (currentPlayerTurn == numberOfPlayers - 1) {
             currentPlayerTurn = 0;
             currentRound += 1;
+
+            if (currentRound > numberOfRounds) {
+                finishGame();
+                return;
+            }
+
             $('#currentRound').text(currentRound);
         } else {
             currentPlayerTurn += 1;
@@ -130,5 +138,74 @@ var cricketIFFE = (function(numberOfPlayers) {
 
         $('#currentPlayerTurnName').text(playerNames[currentPlayerTurn]);
         $('#hitPoints').text('');
-    })
+    });
+
+    function checkIfGameIsFinish() {
+        var potentialWinnerIndexes = [],
+            currentPlayerPoints,
+            currentPlayerIsSuitableForWinner = true,
+            i = 0,
+            currentPlayerPiledPoints,
+            currentPlayerIndex,
+            j = 0,
+            currentPlayerIsWinner = true;
+
+        for(i = 0; i < numberOfPlayers; i += 1) {
+            currentPlayerIsSuitableForWinner = true;
+            currentPlayerPoints = playerPilePoints[i];
+
+            for(var key in currentPlayerPoints) {
+                if (currentPlayerPoints.hasOwnProperty(key)) {
+                    if (currentPlayerPoints[key] < 3) {
+                        currentPlayerIsSuitableForWinner = false;
+                    }
+                }
+            }
+
+            if (currentPlayerIsSuitableForWinner) {
+                potentialWinnerIndexes.push(i);
+            }
+        }
+
+        for(i = 0; i < potentialWinnerIndexes.length; i += 1) {
+            currentPlayerIsWinner = true;
+            currentPlayerIndex = potentialWinnerIndexes[i];
+            currentPlayerPiledPoints = playerPilePoints[currentPlayerIndex];
+
+            for(j = 0; j < numberOfPlayers; j += 1) {
+                if (j == currentPlayerIndex) {
+                    continue;
+                }
+
+                if (playerPilePoints[j] < currentPlayerPiledPoints) {
+                    currentPlayerIsWinner = false;
+                }
+            }
+
+            if (currentPlayerIsWinner) {
+                finishGame(playerNames[currentPlayerIndex]);
+                break;
+            }
+        }
+
+        return false;
+    }
+
+    function finishGame(winnerName) {
+        if (!winnerName) {
+            winnerName = getWinnerName();
+        }
+
+        $('#gameOver').show();
+        $('#actionButtons').hide();
+
+        $('#winnerPlayerName').text(winnerName);
+        $('#winnerRound').text(currentRound);
+
+        $body.animate({scrollTop: 0}, 350);
+    }
+
+    function getWinnerName() {
+
+    }
 });
