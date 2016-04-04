@@ -21,4 +21,37 @@ var cricketIFFE = (function(numberOfPlayers) {
     }
 
     displayConfigurationScreen();
+
+
+    // Game start button
+    var $body = $('body');
+
+    $body.on('click', '#startGameButton', function() {
+        var $configurationScreen = $('#configurationScreen'),
+            $gameScreen = $('#gameScreen'),
+            templateData = {players: []};
+
+        numberOfRounds = $('#numberOfRounds').val() | 0;
+
+        for(var i = 0; i < numberOfPlayers; i += 1) {
+            playerPoints.push({ 20:0, 19:0, 18:0, 17:0, 16:0, 15:0, 25:0 });
+
+            var currentPlayerName = $('#playerName-' + i).val();
+            playerNames.push(currentPlayerName);
+
+            templateData.players.push({
+                name: playerNames[i]
+            });
+        }
+
+        templateData.currentPlayerTurnName = playerNames[0];
+        templateData.numberOfRounds = numberOfRounds;
+        templateData.currentRound = currentRound;
+        var source = $("#cricket-configuration-screen").html();
+        var template = Handlebars.compile(source);
+        $gameScreen.append (template(templateData));
+
+        $configurationScreen.hide();
+        $gameScreen.show();
+    })
 });
