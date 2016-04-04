@@ -7,6 +7,12 @@
 
     <h2>Round <span id="currentRound">{{currentRound}}</span> / <span id="roundNumber">{{numberOfRounds}}</span></h2>
 
+    <ul>
+        {{#each players as |player|}}
+            <li>{{player.name}}: <span id="playerPiledPoints-{{@index}}">0</span></li>
+        {{/each}}
+    </ul>
+
     <table id="cricketScoreTable">
         <thead>
         <tr>
@@ -23,7 +29,7 @@
         <tbody>
         {{#each players as |player|}}
             <tr>
-                <td id="tablePlayName-{{@index}}" class="activePlayerTurn">{{player.name}}</td>
+                <td id="tablePlayName-{{@index}}">{{player.name}}</td>
                 <td>
                     <div class="pointHitWrap">
                         <div id="pointHitBox-player-{{@index}}-20-1" class="pointHitBox"></div>

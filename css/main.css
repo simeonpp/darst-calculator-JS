@@ -72,3 +72,6 @@ th {
   margin-bottom: 10px;
   margin-left: 25px;
 }
+.activePlayerTurn {
+  background: #ff0;
+}
