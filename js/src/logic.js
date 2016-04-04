@@ -23,7 +23,7 @@
             fiveZeroOneIFFE(numberOfPlayers);
             break;
          case 1:
-            cricketIFFE();
+            cricketIFFE(numberOfPlayers);
            break;
          case 2:
             cricketTeamPlayIFFE();

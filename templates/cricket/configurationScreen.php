@@ -1,4 +1,4 @@
-<script id="501-configuration-screen" type="text/x-handlebars-template">
+<script id="cricket-configuration-screen" type="text/x-handlebars-template">
     <section>
         <div class="panel panel-primary">
             <div class="panel-heading">

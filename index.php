@@ -60,6 +60,8 @@
 <?php
     include ('templates/501/configurationScreen.php');
     include ('templates/501/gameScreen.php');
+
+    include ('templates/cricket/configurationScreen.php');
 ?>
 
 
