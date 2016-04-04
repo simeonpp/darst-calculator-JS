@@ -1,0 +1,101 @@
+
+// ==============
+// COMMON
+// ==============
+.boxSizing
+  -webkit-box-sizing border-box
+  -moz-box-sizing border-box
+  box-sizing border-box
+
+// ==============
+// SCREENS
+// ==============
+
+// Mode screen
+#modeScreen
+  display block
+
+  select
+    width 100%
+    padding 10px
+    @extend .boxSizing
+
+
+// Configuration screen
+#configurationScreen
+  display block
+
+  section
+    width 400px
+    margin 0 auto
+
+
+
+
+#screenOne
+  display: none
+
+// ==============
+// 501
+// ==============
+
+#confScreenCricket
+  display: none
+
+#gameScreen
+  display: none
+
+ul#fiveZeroOneScoreUl
+  li.active
+    background greenyellow
+
+
+
+#gameOver
+  display none
+  background #FF665E
+  color white
+  font-weight bold
+  font-size 1.4em
+
+
+.pointHitWrap
+  width 77px;
+  padding 1px 1px;
+  overflow hidden
+
+
+.pointHitBox
+  width 25px
+  height 25px
+  background #FF706D
+  float left
+
+
+.pointHitBoxHit
+  background #3FAF3A !important
+
+
+td.activePlayer
+  background orange
+  color white
+  font-weight bold
+
+
+th
+  text-align center !important
+
+
+#availableHitPointsButtons
+  .availableNumber
+    float left
+    font-weight bold
+    font-size 2em
+    margin-right 15px
+
+  button
+    margin-right 20px
+
+  .row
+    margin-bottom 10px
+    margin-left 25px
