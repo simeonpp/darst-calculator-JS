@@ -23,7 +23,7 @@
         <tbody>
         {{#each players as |player|}}
             <tr>
-                <td id="tablePlayName-{{@index}}">{{player.name}}</td>
+                <td id="tablePlayName-{{@index}}" class="activePlayerTurn">{{player.name}}</td>
                 <td>
                     <div class="pointHitWrap">
                         <div id="pointHitBox-player-{{@index}}-20-1" class="pointHitBox"></div>
@@ -78,20 +78,16 @@
         </tbody>
     </table>
 
-    <section>
-        <h2 id="currentPlayerTurnName">{{currentPlayerTurnName}}</h2>
+    <?php include ('cricket-available-points-buttons.php'); ?>
 
-        <div class="form-group" style="width: 350px">
-            <label for="hitPoints" class="col-lg-4 control-label">Hit points: </label>
-            <div class="col-lg-8">
-                <input type="number" class="form-control" id="hitPoints" placeholder="Points">
-            </div>
-        </div>
+    <section>
+        На ред е
+        <h2 id="currentPlayerTurnName">{{currentPlayerTurnName}}</h2>
+        <div id="hitPoints"></div>
 
         <div id="actionButtons">
-            <div id="nextTurnBtn" class="btn btn-success" style="margin:15px 0 0 10px">Next player</div>
+            <div id="nextTurnBtn" class="btn btn-warning btn-lg" style="margin:15px 0 0 10px">Next player</div>
             <div id="resetTurnBtn" class="btn btn-default" style="margin:15px 0 0 10px">Reset current turn</div>
         </div>
-
     </section>
 </script>
