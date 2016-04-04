@@ -3,7 +3,8 @@ var cricketIFFE = (function(numberOfPlayers) {
         playerPoints = [],
         playerNames = [],
         currentPlayerTurn = 0,
-        currentRound = 1;
+        currentRound = 1,
+        pilePointsOnOthers = true;
 
     function displayConfigurationScreen() {
         var $configurationScreen = $('#configurationScreen'),
@@ -21,6 +22,7 @@ var cricketIFFE = (function(numberOfPlayers) {
     }
 
     displayConfigurationScreen();
+
 
 
     // Game start button
@@ -47,7 +49,7 @@ var cricketIFFE = (function(numberOfPlayers) {
         templateData.currentPlayerTurnName = playerNames[0];
         templateData.numberOfRounds = numberOfRounds;
         templateData.currentRound = currentRound;
-        var source = $("#cricket-configuration-screen").html();
+        var source = $("#cricket-game-screen").html();
         var template = Handlebars.compile(source);
         $gameScreen.append (template(templateData));
 
