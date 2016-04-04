@@ -206,6 +206,18 @@ var cricketIFFE = (function(numberOfPlayers) {
     }
 
     function getWinnerName() {
+        var winnerName = playerNames[0],
+            winnerPoints = playerPilePoints[0],
+            currentPlayerPiledPoints = 0;
 
+        for(var i = 1; i < numberOfPlayers; i += 1) {
+            currentPlayerPiledPoints = playerPilePoints[i];
+            if (currentPlayerPiledPoints < winnerPoints) {
+                winnerPoints = currentPlayerPiledPoints;
+                winnerName = playerNames[i];
+            }
+        }
+
+        return winnerName;
     }
 });
