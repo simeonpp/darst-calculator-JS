@@ -24,7 +24,7 @@
 
                     {{#each players}}
                         <div class="form-group">
-                            <label for="playerName-{{this}}" class="col-lg-4 control-label">Player {{this}}</label>
+                            <label for="playerName-{{@index}}" class="col-lg-4 control-label">Player {{this}}</label>
                             <div class="col-lg-8">
                                 <input type="text" class="form-control" id="playerName-{{@index}}" placeholder="Name">
                             </div>
