@@ -121,14 +121,13 @@ var cricketIFFE = (function(numberOfPlayers) {
         $('#tablePlayName-' + currentPlayerTurn).removeClass('activePlayerTurn');
 
         if (currentPlayerTurn == numberOfPlayers - 1) {
-            currentPlayerTurn = 0;
-            currentRound += 1;
-
-            if (currentRound > numberOfRounds) {
+            if (currentRound >= numberOfRounds) {
                 finishGame();
                 return;
             }
 
+            currentPlayerTurn = 0;
+            currentRound += 1;
             $('#currentRound').text(currentRound);
         } else {
             currentPlayerTurn += 1;
@@ -138,6 +137,14 @@ var cricketIFFE = (function(numberOfPlayers) {
 
         $('#currentPlayerTurnName').text(playerNames[currentPlayerTurn]);
         $('#hitPoints').text('');
+    });
+
+    $body.on('click', '#resetTurnBtn', function() {
+        // TODO: Implement this logic
+    });
+
+    $body.on('click', '#newGameBtn', function() {
+        location.reload();
     });
 
     function checkIfGameIsFinish() {
@@ -152,7 +159,7 @@ var cricketIFFE = (function(numberOfPlayers) {
 
         for(i = 0; i < numberOfPlayers; i += 1) {
             currentPlayerIsSuitableForWinner = true;
-            currentPlayerPoints = playerPilePoints[i];
+            currentPlayerPoints = playerPoints[i];
 
             for(var key in currentPlayerPoints) {
                 if (currentPlayerPoints.hasOwnProperty(key)) {
@@ -177,8 +184,16 @@ var cricketIFFE = (function(numberOfPlayers) {
                     continue;
                 }
 
-                if (playerPilePoints[j] < currentPlayerPiledPoints) {
-                    currentPlayerIsWinner = false;
+                if (pilePointsOnOthers) {
+                    if (playerPilePoints[j] < currentPlayerPiledPoints) {
+                        currentPlayerIsWinner = false;
+                        break;
+                    }
+                } else {
+                    if (playerPilePoints[j] > currentPlayerPiledPoints) {
+                        currentPlayerIsWinner = false;
+                        break;
+                    }
                 }
             }
 
@@ -212,9 +227,17 @@ var cricketIFFE = (function(numberOfPlayers) {
 
         for(var i = 1; i < numberOfPlayers; i += 1) {
             currentPlayerPiledPoints = playerPilePoints[i];
-            if (currentPlayerPiledPoints < winnerPoints) {
-                winnerPoints = currentPlayerPiledPoints;
-                winnerName = playerNames[i];
+
+            if (pilePointsOnOthers) {
+                if (currentPlayerPiledPoints < winnerPoints) {
+                    winnerPoints = currentPlayerPiledPoints;
+                    winnerName = playerNames[i];
+                }
+            } else {
+                if (currentPlayerPiledPoints > winnerPoints) {
+                    winnerPoints = currentPlayerPiledPoints;
+                    winnerName = playerNames[i];
+                }
             }
         }
 
